@@ -50,4 +50,32 @@ $ vagrant destroy -f ubuntu
 ```
 
 ## Exercice 2
+Les commandes sont les pratiquement les mêmes que dans l'exercice 1 :
+```
+$ vagrant up ubuntu
+$ vagrant ssh ubuntu
+$ sudo apt update
+```
+```
+$ sudo apt-add-repository ppa:ansible/ansible
+$ apt search --names-only ansible
+$ sudo apt install ansible -y
+```
+
+Check de la version installée : 
+```
+$ ansible --version
+ansible [core 2.17.8]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/vagrant/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/vagrant/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.10.12 (main, Mar 22 2024, 16:50:05) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+```
+On est sur une version qui est assez proche des dernières release (2.18.X).
+
+## Exercice 3
 
