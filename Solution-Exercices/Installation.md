@@ -4,4 +4,6 @@
 
 `test`
 
-```$ apt install ben```
+```
+$ apt install ben
+```
