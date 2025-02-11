@@ -91,7 +91,8 @@ rtt min/avg/max/mdev = 1.699/1.699/1.699/0.000 ms
 ```
 
 J'utilise la commande suivante pour ajouter les clés publiques de chaque VM au fichier `know_hosts` :
-```[vagrant@ansible ~]$ ssh-keyscan -t rsa target01 target02 target03 >> .ssh/known_hosts
+```
+[vagrant@ansible ~]$ ssh-keyscan -t rsa target01 target02 target03 >> .ssh/known_hosts
 # target03:22 SSH-2.0-OpenSSH_8.4
 # target01:22 SSH-2.0-OpenSSH_8.7
 # target02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
