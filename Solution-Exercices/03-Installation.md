@@ -58,7 +58,7 @@ $ sudo apt-add-repository ppa:ansible/ansible
 ```
 Notez la version fournie par ce dépôt tiers et comparez avec la version officielle de l’exercice précédent.
 
-### Réponses
+### Réponses :
 Les commandes sont pratiquement les mêmes que dans l'exercice 1 :
 ```
 $ vagrant up ubuntu
@@ -108,7 +108,7 @@ Lancez une VM Rocky Linux et installez Ansible en utilisant PIP et Virtualenv.
 Notez bien que contrairement à Debian, le paquet python3-venv n’est pas nécessaire ici, étant donné que Virtualenv fait partie des modules standard de Python dans cette distribution.
 
 
-### Réponses
+### Réponses :
 ```
 $ vagrant up rocky
 $ vagrant ssh rocky
