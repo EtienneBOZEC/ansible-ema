@@ -50,6 +50,15 @@ $ vagrant destroy -f ubuntu
 ```
 
 ## Exercice 2
+
+### Enoncé :
+Répétez l’exercice précédent en configurant un dépôt PPA (Personal Package Archive) pour Ansible :
+```
+$ sudo apt-add-repository ppa:ansible/ansible
+```
+Notez la version fournie par ce dépôt tiers et comparez avec la version officielle de l’exercice précédent.
+
+### Réponses
 Les commandes sont pratiquement les mêmes que dans l'exercice 1 :
 ```
 $ vagrant up ubuntu
@@ -77,5 +86,44 @@ ansible [core 2.17.8]
 ```
 On est sur une version qui est assez proche des dernières release (2.18.X).
 
+```
+$ exit
+$ vagrant destroy -f ubuntu
+```
+
 ## Exercice 3
 
+### Enoncé :
+Lancez une VM Rocky Linux et installez Ansible en utilisant PIP et Virtualenv.
+
+Notez bien que contrairement à Debian, le paquet python3-venv n’est pas nécessaire ici, étant donné que Virtualenv fait partie des modules standard de Python dans cette distribution.
+
+
+### Réponses
+```
+$ vagrant up rocky
+$ vagrant ssh rocky
+```
+Pour update sans faire l'upgrade :
+```
+$ sudo dnf makecache
+```
+
+Et maintenant je mets en place le venv et j'installe ansible sur celui-ci :
+```
+$ sudo dnf install -y python3-pip
+$ python3 -m venv ~/.venv/ansible
+$ source ~/.venv/ansible/bin/activate
+(ansible) $ pip install --upgrade pip
+(ansible) $ pip install ansible
+(ansible) $ ansible --version
+ansible [core 2.15.13]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/ema/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/ema/.venv/ansible/lib64/python3.9/site-packages/ansible
+  ansible collection location = /home/ema/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/ema/.venv/ansible/bin/ansible
+  python version = 3.9.21 (main, Dec  5 2024, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-2)] (/home/ema/.venv/ansible/bin/python3)
+  jinja version = 3.1.5
+  libyaml = True
+```
