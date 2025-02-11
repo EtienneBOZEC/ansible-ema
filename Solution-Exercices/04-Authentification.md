@@ -64,37 +64,37 @@ Après avoir mis en place les VMs, et repris les quelques commandes de l'énonc�
 127.0.0.1 rocky9.localdomain
 
 127.0.1.1 ansible ansible
-192.168.56.10  ansible.sandbox.lan    ansible
-192.168.56.20  rocky.sandbox.lan      rocky
-192.168.56.30  debian.sandbox.lan     debian
-192.168.56.40  suse.sandbox.lan       suse
+192.168.56.10  control.sandbox.lan      control
+192.168.56.20  target01.sandbox.lan    target01
+192.168.56.30  target02.sandbox.lan    target02
+192.168.56.40  target03.sandbox.lan    target03
 ```
 
 Ensuite, comme dans la pratique je vérifie que je peux joindre toutes les VM:
 ```
-[vagrant@ansible ~]$ for HOST in rocky debian suse; do ping -c 1 -q $HOST; done
-PING rocky.sandbox.lan (192.168.56.20) 56(84) bytes of data.
+[vagrant@ansible ~]$ for HOST in target01 target02 target03; do ping -c 1 -q $HOST; done
+PING target01.sandbox.lan (192.168.56.20) 56(84) bytes of data.
 
---- rocky.sandbox.lan ping statistics ---
+--- target01.sandbox.lan ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 2.444/2.444/2.444/0.000 ms
-PING debian.sandbox.lan (192.168.56.30) 56(84) bytes of data.
+PING target02.sandbox.lan (192.168.56.30) 56(84) bytes of data.
 
---- debian.sandbox.lan ping statistics ---
+--- target02.sandbox.lan ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 2.047/2.047/2.047/0.000 ms
-PING suse.sandbox.lan (192.168.56.40) 56(84) bytes of data.
+PING target03.sandbox.lan (192.168.56.40) 56(84) bytes of data.
 
---- suse.sandbox.lan ping statistics ---
+--- target03.sandbox.lan ping statistics ---
 1 packets transmitted, 1 received, 0% packet loss, time 0ms
 rtt min/avg/max/mdev = 1.699/1.699/1.699/0.000 ms
 ```
 
 J'utilise la commande suivante pour ajouter les clés publiques de chaque VM au fichier `know_hosts` :
-```[vagrant@ansible ~]$ ssh-keyscan -t rsa rocky debian suse >> .ssh/known_hosts
-# suse:22 SSH-2.0-OpenSSH_8.4
-# rocky:22 SSH-2.0-OpenSSH_8.7
-# debian:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+```[vagrant@ansible ~]$ ssh-keyscan -t rsa target01 target02 target03 >> .ssh/known_hosts
+# target03:22 SSH-2.0-OpenSSH_8.4
+# target01:22 SSH-2.0-OpenSSH_8.7
+# target02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
 ```
 
 Je vais maintenant générer une paire de clés publique/privée pour me connecter à ces VM sans utiliser l'authentification par mot de passe :
@@ -104,8 +104,8 @@ Je vais maintenant générer une paire de clés publique/privée pour me connect
 
 Je copie ma clé publique sur les VM debian et suse afin de pouvoir me connecter dessus proprement :
 ```
-[vagrant@ansible ~]$ ssh-copy-id vagrant@debian
-[vagrant@ansible ~]$ ssh-copy-id vagrant@suse
+[vagrant@ansible ~]$ ssh-copy-id vagrant@target02
+[vagrant@ansible ~]$ ssh-copy-id vagrant@target03
 ```
 
 Pour la VM Rocky il faut que j'authorise la connexion par mot de passe avant de pouvoir lui passer ma clé privée :
@@ -128,13 +128,13 @@ J'enregistre et je restart le service sshd :
 Je peux maintenant importer la clé publique sur la VM Rocky :
 ```
 [ema@localhost:atelier-02] $ vagrant ssh ansible
-[vagrant@ansible ~]$ ssh-copy-id vagrant@rocky
+[vagrant@ansible ~]$ ssh-copy-id vagrant@target01
 ```
 
 Je dois maintenant être capable de lancer un ping vers chacun de mes VM en utilisant ansible :
 ```
-[vagrant@ansible ~]$ ansible all -i debian,suse,rocky -m ping
-debian | SUCCESS => {
+[vagrant@ansible ~]$ ansible all -i target02,target03,target01 -m ping
+target02 | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
     },
@@ -144,14 +144,14 @@ debian | SUCCESS => {
 [WARNING]: Platform linux on host suse is using the discovered Python interpreter at /usr/bin/python3.6, but future
 installation of another Python interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-core/2.14/reference_appendices/interpreter_discovery.html for more information.
-suse | SUCCESS => {
+target03 | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3.6"
     },
     "changed": false,
     "ping": "pong"
 }
-rocky | SUCCESS => {
+target01 | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3"
     },
