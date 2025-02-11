@@ -6,12 +6,13 @@ Placez-vous dans le répertoire du troisième atelier pratique :
 $ cd ~/formation-ansible/atelier-03
 ```
 Voici les quatre machines virtuelles Ubuntu 22.04 de cet atelier :
-
+```
 Machine virtuelle	Adresse IP
 control	192.168.56.10
 target01	192.168.56.20
 target02	192.168.56.30
 target03	192.168.56.40
+```
 Démarrez les VM :
 ```
 $ vagrant up
@@ -53,7 +54,7 @@ target01 | SUCCESS => {
 
 ### Réponses :
 
-Après avoir mis en place les VMs, et suivi les quelques commandes de l'énoncé, je modifie le fichier host de la VM ansible :
+Après avoir mis en place les VMs, et repris les quelques commandes de l'énoncé, je modifie le fichier host de la VM ansible :
 ```
 [vagrant@ansible ~]$ sudo nano /etc/hosts
 [vagrant@ansible ~]$ cat /etc/hosts
