@@ -65,9 +65,18 @@ $ vagrant up ubuntu
 $ vagrant ssh ubuntu
 $ sudo apt update
 ```
+J'ajoute le repo PPA :
 ```
 $ sudo apt-add-repository ppa:ansible/ansible
+```
+
+Je vérifie que le paquet est bien différent que celui des repo ubuntu :
+```
 $ apt search --names-only ansible
+```
+
+Enfin, j'installe ansible :
+```
 $ sudo apt install ansible -y
 ```
 
@@ -104,7 +113,7 @@ Notez bien que contrairement à Debian, le paquet python3-venv n’est pas néce
 $ vagrant up rocky
 $ vagrant ssh rocky
 ```
-Pour update sans faire l'upgrade :
+Pour update les repo sans faire l'upgrade j'utilise la commande suivante :
 ```
 $ sudo dnf makecache
 ```
