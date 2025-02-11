@@ -142,7 +142,7 @@ target02 | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
-[WARNING]: Platform linux on host suse is using the discovered Python interpreter at /usr/bin/python3.6, but future
+[WARNING]: Platform linux on host target03 is using the discovered Python interpreter at /usr/bin/python3.6, but future
 installation of another Python interpreter could change the meaning of that path. See
 https://docs.ansible.com/ansible-core/2.14/reference_appendices/interpreter_discovery.html for more information.
 target03 | SUCCESS => {
