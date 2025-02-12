@@ -111,7 +111,7 @@ rocky | CHANGED => {
     "uid": 0
 }
 ```
-Encore une fois, sur le second run de la commande aucune modification n'est effectuée.
+Encore une fois, sur le second run de la commande aucune modification n'est effectuée. 
 
 ### Supprimez le fichier /tmp/test3.txt sur les Target Hosts en utilisant le module file avec le paramètre state=absent :
 ```
@@ -132,7 +132,7 @@ rocky | CHANGED => {
     "state": "absent"
 }
 ```
-Idem
+Idem, plus rien à faire.
 
 ### Enfin, affichez l’espace utilisé par la partition principale sur tous les Target Hosts. Que remarquez-vous ?
 ```
@@ -147,4 +147,4 @@ rocky | CHANGED | rc=0 >>
 Filesystem                  Size  Used Avail Use% Mounted on
 /dev/mapper/rl_rocky9-root   70G  2.4G   68G   4% /
 ```
-Dans le cas de cette commande, peut importe le nombre de fois que l'on execute l'instruction elle nous retourne `CHANGED`. En effet cette commande ne modifie rien sur le système cible, elle retourne simplement une information. 
+Dans le cas de cette commande, peut importe le nombre de fois que l'on execute l'instruction elle nous retourne `CHANGED`. En effet cette commande ne modifie rien sur le système cible, elle retourne simplement une information. Il y a toujours quelque chose à faire.
