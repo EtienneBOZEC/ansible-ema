@@ -53,6 +53,7 @@ Ensuite j'écris le playbook en le lançant plusieurs fois en cours d'écriture 
         name: apache2
         state: started
         enabled: true
+
     - name: Install custom web page
       copy:
         dest: /var/www/html/index.html
@@ -72,7 +73,7 @@ Ensuite j'écris le playbook en le lançant plusieurs fois en cours d'écriture 
 ```
 Résultats :
 ```
-vagrant@ansible ema]$ ansible-playbook playbooks/apache-debian.yml 
+[vagrant@ansible ema]$ ansible-playbook playbooks/apache-debian.yml 
 
 PLAY [debian] *********************************************************************************************************
 
@@ -94,10 +95,155 @@ changed: [debian]
 PLAY RECAP ************************************************************************************************************
 debian                     : ok=5    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
-
+```
+[vagrant@ansible ema]$ curl 192.168.56.30
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>My first Ansible-managed website</h1>
+  </body>
+</html>
+```
 
 ### apache-rocky.yml
+```
+---  # apache-rocky.yml
+
+- hosts: rocky
+  tasks:
+    - name: Install Apache
+      dnf:
+        name: httpd
+        state: present
+
+    - name: Start & Enable Apache
+      service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Install custom web page
+      copy:
+        dest: /var/www/html/index.html
+        mode: 0644
+        content: |
+          <!doctype html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <title>Test</title>
+            </head>
+            <body>
+              <h1>My first Ansible-managed website</h1>
+            </body>
+          </html>
+...
+```
+
+Résultats:
+```
+[vagrant@ansible ema]$ ansible-playbook playbooks/apache-rocky.yml 
+
+PLAY [rocky] **********************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************
+ok: [rocky]
+
+TASK [Install Apache] *************************************************************************************************
+ok: [rocky]
+
+TASK [Start & Enable Apache] ******************************************************************************************
+changed: [rocky]
+
+TASK [Install custom web page] ****************************************************************************************
+changed: [rocky]
+
+PLAY RECAP ************************************************************************************************************
+rocky                      : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+```
+[vagrant@ansible ema]$ curl 192.168.56.20
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>My first Ansible-managed website</h1>
+  </body>
+</html>
+```
 
 ### apache-suse.yml
+```
+---  # apache-suse.yml
 
+- hosts: suse
+  tasks:
+    - name: Install Apache
+      zypper:
+        name: apache2
 
+    - name: Start & Enable Apache
+      service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: Install custom web page
+      copy:
+        dest: /srv/www/htdocs/index.html
+        mode: 0644
+        content: |
+          <!doctype html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <title>Test</title>
+            </head>
+            <body>
+              <h1>My first Ansible-managed website</h1>
+            </body>
+          </html>
+...
+```
+
+Résultats:
+```
+[vagrant@ansible ema]$ ansible-playbook playbooks/apache-suse.yml
+
+PLAY [suse] ***********************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************
+ok: [suse]
+
+TASK [Install Apache] *************************************************************************************************
+ok: [suse]
+
+TASK [Start & Enable Apache] ******************************************************************************************
+ok: [suse]
+
+TASK [Install custom web page] ****************************************************************************************
+ok: [suse]
+
+PLAY RECAP ************************************************************************************************************
+suse                       : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+```
+[vagrant@ansible ema]$ curl suse
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>My first Ansible-managed website</h1>
+  </body>
+</html>
+```
