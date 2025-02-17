@@ -64,7 +64,7 @@ Mon playbook :
     - name: Reload chrony
       service:
         name: chronyd
-        state: reloaded
+        state: restarted
 
 ...
 ```
