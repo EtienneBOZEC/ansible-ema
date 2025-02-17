@@ -58,7 +58,7 @@ Mon playbook :
           makestep 1.0 3
           rtcsync
           logdir /var/log/chrony
-      notify:
+      notify: Reload chrony
 
   handlers:
     - name: Reload chrony
@@ -81,29 +81,34 @@ Lancement du playbook:
 PLAY [redhat] *********************************************************************************************************
 
 TASK [Gathering Facts] ************************************************************************************************
-ok: [target02]
 ok: [target01]
 ok: [target03]
+ok: [target02]
 
 TASK [Install Chrony] *************************************************************************************************
-ok: [target02]
-ok: [target03]
 ok: [target01]
+ok: [target03]
+ok: [target02]
 
 TASK [Enable & Start Chrony] ******************************************************************************************
-ok: [target01]
-ok: [target02]
 ok: [target03]
+ok: [target02]
+ok: [target01]
 
 TASK [Configure Chrony] ***********************************************************************************************
 changed: [target03]
 changed: [target02]
 changed: [target01]
 
+RUNNING HANDLER [Reload chrony] ***************************************************************************************
+changed: [target01]
+changed: [target02]
+changed: [target03]
+
 PLAY RECAP ************************************************************************************************************
-target01                   : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-target02                   : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-target03                   : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+target01                   : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
 ```
 
 Vérification de l'idempotence:
@@ -113,8 +118,8 @@ Vérification de l'idempotence:
 PLAY [redhat] *********************************************************************************************************
 
 TASK [Gathering Facts] ************************************************************************************************
-ok: [target03]
 ok: [target02]
+ok: [target03]
 ok: [target01]
 
 TASK [Install Chrony] *************************************************************************************************
@@ -128,13 +133,13 @@ ok: [target01]
 ok: [target03]
 
 TASK [Configure Chrony] ***********************************************************************************************
-ok: [target01]
 ok: [target02]
 ok: [target03]
+ok: [target01]
 
 PLAY RECAP ************************************************************************************************************
 target01                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 target02                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-target03                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+target03                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 On peut voir que mes tâches sont bien idempotentes.
