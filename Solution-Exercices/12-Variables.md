@@ -196,5 +196,41 @@ ok: [target03] => {
 
 ### Écrivez un playbook `display_user.yml` qui affiche un utilisateur et son mot de passe correspondant à l’aide des variables `user` et `password`. Ces deux variables devront être saisies de manière interactive pendant l’exécution du playbook. Les valeurs par défaut seront `microlinux` pour `user` et `yatahongaga` pour `password`. Le mot de passe ne devra pas s’afficher pendant la saisie.
 ```
+---  # display_user.yml
 
+- hosts: localhost
+  gather_facts: false
+
+  vars_prompt:
+    - name: user
+      prompt: Please enter your username
+      default: microlinux
+      private: false
+
+    - name: password
+      prompt: Please enter your password
+      default: yatahongaga
+      private: true
+
+  tasks:
+    - debug:
+        msg: "Username: {{user}}, Password: {{password}}"
+...
 ```
+Résultats du playbook:
+```
+[vagrant@control ema]$ ansible-playbook playbooks/display_user.yml
+Please enter your username [microlinux]: test
+Please enter your password [yatahongaga]: 
+
+PLAY [localhost] ******************************************************************************************************
+
+TASK [debug] **********************************************************************************************************
+ok: [localhost] => {
+    "msg": "Username: test, Password: mzoufigsifyugsdfidgv"
+}
+
+PLAY RECAP ************************************************************************************************************
+localhost                  : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0  
+```
+> Les * n'apparaissent pas non plus lors de la frappe du mot de passe, c'est normal j'ai fait en sorte de les cacher pour tout mot de passe tapé dans le terminal.
