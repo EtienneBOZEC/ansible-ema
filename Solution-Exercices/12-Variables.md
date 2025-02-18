@@ -1,36 +1,71 @@
 # Variables
 
-## Écrivez un playbook `myvars1.yml` qui affiche respectivement votre voiture et votre moto préférée en utilisant le module `debug` et deux variables `mycar` et `mybike` définies en tant que play vars.
+### Écrivez un playbook `myvars1.yml` qui affiche respectivement votre voiture et votre moto préférée en utilisant le module `debug` et deux variables `mycar` et `mybike` définies en tant que play vars.
+```
+---  # myvars1.yml
+
+- hosts: all
+  gather_facts: false
+
+  vars:
+    mycar: "BMW E28 528i"
+    mybike: "Triumph Trident 660"
+
+  tasks:
+    - debug:
+        msg: "My car: {{mycar}}, \nMy bike: {{mybike}}"
+
+...
+```
+Résultats du playbook:
+```
+[vagrant@control ema]$ ansible-playbook playbooks/myvars1.yml 
+
+PLAY [all] ************************************************************************************************************
+
+TASK [debug] **********************************************************************************************************
+ok: [target01] => {
+    "msg": "My car: BMW E28 528i, \nMy bike: Triumph Trident 660"
+}
+ok: [target02] => {
+    "msg": "My car: BMW E28 528i, \nMy bike: Triumph Trident 660"
+}
+ok: [target03] => {
+    "msg": "My car: BMW E28 528i, \nMy bike: Triumph Trident 660"
+}
+
+PLAY RECAP ************************************************************************************************************
+target01                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target02                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+target03                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+### En utilisant les extra vars, remplacez successivement l’une et l’autre marque – puis les deux à la fois – avant d’exécuter le play.
 ```
 
 ```
 
-## En utilisant les extra vars, remplacez successivement l’une et l’autre marque – puis les deux à la fois – avant d’exécuter le play.
+### Écrivez un playbook `myvars2.yml` qui fait essentiellement la même chose que `myvars1.yml`, mais en utilisant une tâche avec `set_fact` pour définir les deux variables.
 ```
 
 ```
 
-## Écrivez un playbook `myvars2.yml` qui fait essentiellement la même chose que `myvars1.yml`, mais en utilisant une tâche avec `set_fact` pour définir les deux variables.
+### Là aussi, essayez de remplacer les deux variables en utilisant des extra vars avant l’exécution du play.
 ```
 
 ```
 
-## Là aussi, essayez de remplacer les deux variables en utilisant des extra vars avant l’exécution du play.
+### Écrivez un playbook `myvars3.yml` qui affiche le contenu des deux variables `mycar` et `mybike` mais sans les définir. Avant d’exécuter le playbook, définissez `VW` et `BMW` comme valeurs par défaut pour `mycar` et `mybike` pour tous les hôtes, en utilisant l’endroit approprié.
 ```
 
 ```
 
-## Écrivez un playbook `myvars3.yml` qui affiche le contenu des deux variables `mycar` et `mybike` mais sans les définir. Avant d’exécuter le playbook, définissez `VW` et `BMW` comme valeurs par défaut pour `mycar` et `mybike` pour tous les hôtes, en utilisant l’endroit approprié.
+### Effectuez le nécessaire pour remplacer `VW` et `BMW` par `Mercedes` et `Honda` sur l’hôte target02.
 ```
 
 ```
 
-## Effectuez le nécessaire pour remplacer `VW` et `BMW` par `Mercedes` et `Honda` sur l’hôte target02.
-```
-
-```
-
-## Écrivez un playbook `display_user.yml` qui affiche un utilisateur et son mot de passe correspondant à l’aide des variables `user` et `password`. Ces deux variables devront être saisies de manière interactive pendant l’exécution du playbook. Les valeurs par défaut seront `microlinux` pour `user` et `yatahongaga` pour `password`. Le mot de passe ne devra pas s’afficher pendant la saisie.
+### Écrivez un playbook `display_user.yml` qui affiche un utilisateur et son mot de passe correspondant à l’aide des variables `user` et `password`. Ces deux variables devront être saisies de manière interactive pendant l’exécution du playbook. Les valeurs par défaut seront `microlinux` pour `user` et `yatahongaga` pour `password`. Le mot de passe ne devra pas s’afficher pendant la saisie.
 ```
 
 ```
