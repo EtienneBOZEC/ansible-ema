@@ -133,7 +133,7 @@ ok: [target03] => {
 }
 ...
 ```
-| Ca fonctionne, ce qui est normal puisque les extra vars priment sur toutes les autres variables.
+> Ca fonctionne, ce qui est normal puisque les extra vars priment sur toutes les autres variables.
 
 ### Écrivez un playbook `myvars3.yml` qui affiche le contenu des deux variables `mycar` et `mybike` mais sans les définir. Avant d’exécuter le playbook, définissez `VW` et `BMW` comme valeurs par défaut pour `mycar` et `mybike` pour tous les hôtes, en utilisant l’endroit approprié.
 ```
