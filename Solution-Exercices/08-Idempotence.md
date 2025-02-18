@@ -111,7 +111,7 @@ rocky | CHANGED => {
     "uid": 0
 }
 ```
-Encore une fois, sur le second run de la commande aucune modification n'est effectuée. 
+> Encore une fois, sur le second run de la commande aucune modification n'est effectuée. 
 
 ### Supprimez le fichier /tmp/test3.txt sur les Target Hosts en utilisant le module file avec le paramètre state=absent :
 ```
@@ -132,7 +132,7 @@ rocky | CHANGED => {
     "state": "absent"
 }
 ```
-Idem, plus rien à faire.
+> Idem, plus rien à faire.
 
 ### Enfin, affichez l’espace utilisé par la partition principale sur tous les Target Hosts. Que remarquez-vous ?
 ```

@@ -36,7 +36,7 @@ Full Text Search... Done
 ansible/jammy 2.10.7+merged+base+2.10.8+dfsg-1 all
   Configuration management, deployment, and task execution system
 ```
-Je trouve la version trop ancienne, je vais l'installer avec pip dans un venv.
+> Je trouve la version trop ancienne, je vais l'installer avec pip dans un venv.
 ```
 vagrant@control:~$ sudo apt update
 vagrant@control:~$ sudo apt install python3-pip python3-venv -y
@@ -143,7 +143,7 @@ J'ajoute les lignes suivantes au fichier "hosts" :
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=vagrant
 ```
-J'en profite aussi pour ajouer la ligne ansible_python_interpreter pour ne plus avoir tous les warnings.
+> J'en profite aussi pour ajouer la ligne ansible_python_interpreter pour ne plus avoir tous les warnings.
 
 ### Envoyez un ping Ansible vers le groupe de machines [all] :
 ```

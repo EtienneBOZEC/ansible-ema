@@ -142,4 +142,4 @@ target01                   : ok=4    changed=0    unreachable=0    failed=0    s
 target02                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 target03                   : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
-On peut voir que mes tâches sont bien idempotentes.
+> On peut voir que mes tâches sont bien idempotentes.
